@@ -16,6 +16,7 @@
     
 <h2>2.集成jwt与gateway与security</h2>
 * 1.pom文件
+
 ```
 <parent>
         <groupId>org.springframework.boot</groupId>
@@ -74,6 +75,7 @@
 
 我们想要自己获取用户信息不采用默认配置方式，可以自己实现ReactiveUserDetailsService接口并纳入到spring管理即可
 这里我们只是写个示例，后续可以改为数据库获取方式，注意这里的PasswordEncoder我们使用的是BCrytPasswordEncoder，这里面有响应式编程的语法
+
 ```
 @Component
 public class JwtReactiveUserDetailsService implements ReactiveUserDetailsService {
@@ -101,6 +103,7 @@ public class JwtReactiveUserDetailsService implements ReactiveUserDetailsService
     默认的登录过滤器，基本能够满足需求，不同的是我们需要重写在登录成功之后的逻辑，要将jwttoken放到请求中返回给前台。因此
     
     我们实现LoginSuccessHandleer接口，进行配置
+    
 ```
 @Component
 public class JwtLoginSuccessHandler implements ServerAuthenticationSuccessHandler {
@@ -126,6 +129,7 @@ public class JwtLoginSuccessHandler implements ServerAuthenticationSuccessHandle
 * 4.实现ServerSecurityContextRepository
 
     改接口是ReactorContextWebFilter进行权限过滤时获取用户权限信息的实现，我们实现它从token中获取用户权限。
+    
 ```
 @Component
 public class JwtServerSecurityContextRepository implements ServerSecurityContextRepository {
@@ -176,6 +180,7 @@ public class JwtServerSecurityContextRepository implements ServerSecurityContext
 * 5.实现ReactiveAuthorizationManager
 
     其实AuthorizationWebFilter本身的鉴权流程和逻辑，不用动，我们只需要为其指定自己逻辑的ReactiveAuthorizationManager即可实现鉴权。
+    
 ```
 @Component
 public class JwtReactiveAuthorizationManager implements ReactiveAuthorizationManager<ServerWebExchange>,InitializingBean{
@@ -210,6 +215,7 @@ public class JwtReactiveAuthorizationManager implements ReactiveAuthorizationMan
 ```
 
 * 6.配置SecurityConfiguration
+
 ```
 
 /**
