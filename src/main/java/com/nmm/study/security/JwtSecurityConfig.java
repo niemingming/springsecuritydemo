@@ -3,6 +3,7 @@ package com.nmm.study.security;
 import com.nmm.study.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
@@ -23,6 +24,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Configuration
 @EnableWebSecurity
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired

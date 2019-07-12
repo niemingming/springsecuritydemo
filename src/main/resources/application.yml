@@ -1,3 +1,15 @@
 jwt:
   security:
     key: b655ce5449c51283e959f9e9553bceec539e94c7661b305ee003a9c6c3c16fdf6f9769391a65857dc2ae12395cb3c4c80af4daeed54baacf6bce4261688f9f72
+logging:
+  level:
+    console: DEBUG
+#    root: DEBUG
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: test
+        uri: http://localhost:8080/api/
+        predicates:
+        - Path=/api/**
